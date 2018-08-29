@@ -8,6 +8,6 @@ public class LoginController {
 
 	@GetMapping("myLoginPage") // Must match what's in SecurityConfig.java
 	public String myLoginPage() {
-		return "loginpage";
+		return "fancy-login";
 	}
 }
