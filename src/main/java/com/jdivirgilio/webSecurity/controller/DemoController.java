@@ -15,30 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DemoController {
 
-	public enum Role {
-		ROLE_EMPLOYEE("main", 0), ROLE_MANAGER("leaders", 1), ROLE_ADMIN("systems", 2);
-
-		private final String page;
-		private final int priority;
-
-		Role(String page, int priority) {
-			this.page = page;
-			this.priority = priority;
-		}
-
-		public String getPage() {
-			return page;
-		}
-
-		public int getPriority() {
-			return priority;
-		}
-
-		public int compare(Role that) {
-			return Integer.compare(this.priority, that.priority);
-		}
-	}
-
 	@GetMapping("/")
 	public String mainPage(Model model) {
 
@@ -50,16 +26,24 @@ public class DemoController {
 		model.addAttribute("userName", user);
 		model.addAttribute("authorities", authorities);
 
-		ArrayList<Role> roles = new ArrayList<>();
-
 		for (Object o : authorities) {
-			roles.add(Role.valueOf(((SimpleGrantedAuthority) o).getAuthority()));
+			if (((SimpleGrantedAuthority)o).getAuthority().equals("ROLE_MANAGER") )
+				model.addAttribute("isManager", true);
+			if (((SimpleGrantedAuthority)o).getAuthority().equals("ROLE_ADMIN") )
+				model.addAttribute("isAdmin", true);
 		}
 
-		int numner2 = roles.size();
-		Role maxRole = Collections.max(roles);
+		return "main";
+	}
+	
+	@GetMapping("/leaders")
+	public String leaders() {
+		return "leaders";
+	}
 
-		return maxRole.getPage();
+	@GetMapping("/systems")
+	public String systems() {
+		return "leaders";
 	}
 
 }

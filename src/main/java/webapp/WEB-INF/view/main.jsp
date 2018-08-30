@@ -11,7 +11,7 @@
 <title>Main</title>
 </head>
 <body>
-	Main landing page!!!
+	<h1>Howdy ${userName}!!!</h1>
 
 	<%-- User: <sec:authentication property="principal.username" />  Displays user id of current logged in user 
 		Keeping logic out of the main page and in the contoller
@@ -25,6 +25,19 @@
 		<c:forEach var="auth" items="${authorities}" >
 			${auth}
 		</c:forEach>
+	</p>
+	<p>
+	${role}
+		<c:if test="${isManager}">
+			<p>
+				<a href="${pageContext.request.contextPath}/leaders">Manager's Page</a>
+			</p>
+		</c:if>
+		<c:if test="${isAdmin}">
+			<p>
+				<a href="${pageContext.request.contextPath}/systems">Admin's Page</a>
+			</p>
+		</c:if>
 	</p>
 	<form:form action="${pageContext.request.contextPath}/logout"
 				method="POST">
