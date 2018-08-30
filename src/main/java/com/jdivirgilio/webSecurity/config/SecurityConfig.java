@@ -34,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/myLoginPage") // We create this controller to map to this page..see LoginController.java
 				.loginProcessingUrl("/authenticateUser") // No controller request mapping ... this is provided by the framework
-				.permitAll();
+				.permitAll()
+			.and()
+				.logout().permitAll(); // adds logout support default url is /logout
+									   // This is free..not code required..sent directly to the security filters
 	}
 }

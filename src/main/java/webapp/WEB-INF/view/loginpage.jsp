@@ -25,9 +25,10 @@
 	<form:form action="${pageContext.request.contextPath}/authenticateUser"
 				method="POST"> <!--  must be a POST method -->
 		
-		<c:if test="${param.error != null}"> <!-- check for error during logging -->
-			<i class="failed">Invalid Username or Password "${param.name}"</i>
-		</c:if>
+
+<%-- 		<c:if test="${param.error != null}"> <!-- check for error during logging --> --%>
+<%-- 			<i class="failed">Invalid Username or Password "${param.name}"</i> --%>
+<%-- 		</c:if> --%>
 		
 		<p>
 		User name: <input type="text" name="username" />
